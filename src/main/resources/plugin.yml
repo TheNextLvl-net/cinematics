@@ -4,5 +4,6 @@ main: "net.nonswag.tnl.cinematics.Cinematics"
 api-version: "1.13"
 website: "https://www.thenextlvl.net"
 author: "NonSwag"
+depend: ["TNLListener"]
 commands:
   cinematic:
