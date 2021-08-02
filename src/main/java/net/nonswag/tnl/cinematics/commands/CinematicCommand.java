@@ -45,16 +45,16 @@ public class CinematicCommand implements CommandExecutor {
                                 player.recordCinematic(new Recording(args[1], cinematic -> {
                                     player.sendMessage("%prefix% §aSaving recording §6" + args[1]);
                                     cinematic.getAnimation().export();
-                                    player.loadCinematic(cinematic.getAnimation()).play();
+                                    player.loadCinematic(cinematic.getAnimation()).play(null);
                                 }, tnlPlayer -> tnlPlayer.getVirtualStorage().containsKey("recording") &&
-                                        tnlPlayer.getVirtualStorage().get("recording").nonnull().equals(args[1]), 100));
+                                        tnlPlayer.getVirtualStorage().get("recording").nonnull().equals(args[1]), 20));
                             } else player.sendMessage("%prefix% §cA record with this name already exists");
                         }
                     } else player.sendMessage("%prefix% §c/cinematic record §8[§6Record§8]");
                 } else if (args[0].equalsIgnoreCase("play")) {
                     if (args.length >= 2) {
                         if (Animation.exists(args[1])) {
-                            player.loadCinematic(Animation.load(args[1]).nonnull()).play();
+                            player.loadCinematic(Animation.load(args[1]).nonnull()).play(null);
                         } else player.sendMessage("%prefix% §cA record with this name does not exist");
                     } else player.sendMessage("%prefix% §c/cinematic load §8[§6Name§8]");
                 } else if (args[0].equalsIgnoreCase("info")) {
