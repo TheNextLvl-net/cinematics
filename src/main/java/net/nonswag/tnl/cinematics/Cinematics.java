@@ -1,7 +1,6 @@
 package net.nonswag.tnl.cinematics;
 
 import net.nonswag.tnl.cinematics.commands.CinematicCommand;
-import net.nonswag.tnl.cinematics.completer.CinematicCommandTabCompleter;
 import net.nonswag.tnl.listener.api.command.CommandManager;
 import net.nonswag.tnl.listener.api.plugin.PluginUpdate;
 import net.nonswag.tnl.listener.api.settings.Settings;
@@ -18,8 +17,7 @@ public class Cinematics extends JavaPlugin {
     @Override
     public void onEnable() {
         setInstance(this);
-        CommandManager commandManager = CommandManager.cast(this);
-        commandManager.registerCommand("cinematic", "tnl.cinematic", new CinematicCommand(), new CinematicCommandTabCompleter());
+        CommandManager.registerCommands(new CinematicCommand());
         if (Settings.AUTO_UPDATER.getValue()) new PluginUpdate(this).downloadUpdate();
     }
 

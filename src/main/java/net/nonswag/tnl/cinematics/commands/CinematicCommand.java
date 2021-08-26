@@ -3,24 +3,29 @@ package net.nonswag.tnl.cinematics.commands;
 import com.google.common.io.Files;
 import net.nonswag.tnl.listener.api.animation.Animation;
 import net.nonswag.tnl.listener.api.animation.Recording;
+import net.nonswag.tnl.listener.api.command.CommandSource;
+import net.nonswag.tnl.listener.api.command.Invocation;
+import net.nonswag.tnl.listener.api.command.TNLCommand;
 import net.nonswag.tnl.listener.api.message.Message;
 import net.nonswag.tnl.listener.api.player.TNLPlayer;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
 import javax.annotation.Nonnull;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CinematicCommand implements CommandExecutor {
+public class CinematicCommand extends TNLCommand {
+
+    public CinematicCommand() {
+        super("cinematic", "tnl.cinematic");
+    }
 
     @Override
-    public boolean onCommand(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
-        if (sender instanceof Player) {
-            TNLPlayer player = TNLPlayer.cast((Player) sender);
+    protected void execute(@Nonnull Invocation invocation) {
+        CommandSource source = invocation.source();
+        String[] args = invocation.arguments();
+        if (source.isPlayer()) {
+            TNLPlayer player = source.player();
             if (args.length >= 1) {
                 if (args[0].equalsIgnoreCase("delete")) {
                     if (args.length >= 2) {
@@ -94,7 +99,43 @@ public class CinematicCommand implements CommandExecutor {
                 player.sendMessage("%prefix% §c/cinematic info §8[§6Record§8]");
                 player.sendMessage("%prefix% §c/cinematic list");
             }
-        } else sender.sendMessage(Message.PLAYER_COMMAND_EN.getText());
-        return false;
+        } else source.sendMessage(Message.PLAYER_COMMAND_EN.getText());
+    }
+
+    @Nonnull
+    @Override
+    protected List<String> suggest(@Nonnull Invocation invocation) {
+        String[] args = invocation.arguments();
+        List<String> suggestions = new ArrayList<>();
+        if (args.length <= 1) {
+            File animations = new File("plugins/Animations");
+            File[] files = animations.listFiles();
+            if (files != null) {
+                for (File file : files) {
+                    if (Files.getFileExtension(file.getName()).equalsIgnoreCase("json")) {
+                        suggestions.add("delete");
+                        suggestions.add("play");
+                        suggestions.add("info");
+                        suggestions.add("list");
+                        break;
+                    }
+                }
+            }
+            suggestions.add("record");
+        }
+        if (args.length == 2) {
+            if (args[0].equalsIgnoreCase("delete") || args[0].equalsIgnoreCase("play") || args[0].equalsIgnoreCase("info")) {
+                File animations = new File("plugins/Animations");
+                File[] files = animations.listFiles();
+                if (files != null) {
+                    for (File file : files) {
+                        if (Files.getFileExtension(file.getName()).equalsIgnoreCase("json")) {
+                            suggestions.add(Files.getNameWithoutExtension(file.getName()));
+                        }
+                    }
+                }
+            }
+        }
+        return suggestions;
     }
 }
