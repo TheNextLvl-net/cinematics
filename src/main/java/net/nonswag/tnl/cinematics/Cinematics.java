@@ -3,13 +3,13 @@ package net.nonswag.tnl.cinematics;
 import net.nonswag.tnl.cinematics.commands.CinematicCommand;
 import net.nonswag.tnl.listener.api.command.CommandManager;
 import net.nonswag.tnl.listener.api.plugin.PluginUpdate;
+import net.nonswag.tnl.listener.api.plugin.TNLPlugin;
 import net.nonswag.tnl.listener.api.settings.Settings;
-import org.bukkit.plugin.java.JavaPlugin;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class Cinematics extends JavaPlugin {
+public class Cinematics extends TNLPlugin {
 
     @Nullable
     private static Cinematics instance = null;
