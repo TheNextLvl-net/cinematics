@@ -1,12 +1,12 @@
 package net.nonswag.tnl.cinematics.commands;
 
 import com.google.common.io.Files;
+import net.nonswag.tnl.core.api.command.CommandSource;
+import net.nonswag.tnl.core.api.command.Invocation;
+import net.nonswag.tnl.core.api.message.Message;
 import net.nonswag.tnl.listener.api.animation.Animation;
 import net.nonswag.tnl.listener.api.animation.Recording;
-import net.nonswag.tnl.listener.api.command.CommandSource;
-import net.nonswag.tnl.listener.api.command.Invocation;
 import net.nonswag.tnl.listener.api.command.TNLCommand;
-import net.nonswag.tnl.listener.api.message.Message;
 import net.nonswag.tnl.listener.api.player.TNLPlayer;
 
 import javax.annotation.Nonnull;
@@ -25,7 +25,7 @@ public class CinematicCommand extends TNLCommand {
         CommandSource source = invocation.source();
         String[] args = invocation.arguments();
         if (source.isPlayer()) {
-            TNLPlayer player = source.player();
+            TNLPlayer player = (TNLPlayer) source.player();
             if (args.length >= 1) {
                 if (args[0].equalsIgnoreCase("delete")) {
                     if (args.length >= 2) {
@@ -49,8 +49,8 @@ public class CinematicCommand extends TNLCommand {
                                 player.sendMessage("%prefix% §aRecording §6" + args[1]);
                                 player.recordCinematic(new Recording(args[1], cinematic -> {
                                     player.sendMessage("%prefix% §aSaving recording §6" + args[1]);
-                                    cinematic.getAnimation().export();
-                                    player.loadCinematic(cinematic.getAnimation()).play(null);
+                                    cinematic.animation().export();
+                                    player.loadCinematic(cinematic.animation()).play(null);
                                 }, tnlPlayer -> tnlPlayer.getVirtualStorage().containsKey("recording") &&
                                         tnlPlayer.getVirtualStorage().get("recording").nonnull().equals(args[1]), 20));
                             } else player.sendMessage("%prefix% §cA record with this name already exists");
