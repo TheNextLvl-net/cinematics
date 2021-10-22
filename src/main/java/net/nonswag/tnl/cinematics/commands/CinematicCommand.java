@@ -3,10 +3,10 @@ package net.nonswag.tnl.cinematics.commands;
 import com.google.common.io.Files;
 import net.nonswag.tnl.core.api.command.CommandSource;
 import net.nonswag.tnl.core.api.command.Invocation;
-import net.nonswag.tnl.core.api.message.Message;
 import net.nonswag.tnl.listener.api.animation.Animation;
 import net.nonswag.tnl.listener.api.animation.Recording;
 import net.nonswag.tnl.listener.api.command.TNLCommand;
+import net.nonswag.tnl.listener.api.command.exceptions.SourceMismatchException;
 import net.nonswag.tnl.listener.api.player.TNLPlayer;
 
 import javax.annotation.Nonnull;
@@ -99,7 +99,7 @@ public class CinematicCommand extends TNLCommand {
                 player.sendMessage("%prefix% §c/cinematic info §8[§6Record§8]");
                 player.sendMessage("%prefix% §c/cinematic list");
             }
-        } else source.sendMessage(Message.PLAYER_COMMAND_EN.getText());
+        } else throw new SourceMismatchException();
     }
 
     @Nonnull
