@@ -3,6 +3,7 @@ package net.nonswag.tnl.cinematics.commands;
 import com.google.common.io.Files;
 import net.nonswag.tnl.core.api.command.CommandSource;
 import net.nonswag.tnl.core.api.command.Invocation;
+import net.nonswag.tnl.core.utils.StringUtil;
 import net.nonswag.tnl.listener.api.cinematic.Recording;
 import net.nonswag.tnl.listener.api.command.TNLCommand;
 import net.nonswag.tnl.listener.api.command.exceptions.SourceMismatchException;
@@ -41,7 +42,7 @@ public class CinematicCommand extends TNLCommand {
                     CinematicManger cinematicManger = player.cinematicManger();
                     Messenger messenger = player.messenger();
                     if (cinematicManger.isRecording()) {
-                        cinematicManger.stopPlaying();
+                        cinematicManger.stopRecording();
                         messenger.sendMessage("%prefix% §aStopped the recording");
                     } else if (args.length >= 2) {
                         String name = args[1];
@@ -67,7 +68,7 @@ public class CinematicCommand extends TNLCommand {
                         if (recording != null) {
                             messenger.sendMessage("%prefix% §7Recording§8: §6" + recording.getName());
                             messenger.sendMessage("%prefix% §7Frames§8: §6" + recording.getSteps().size());
-                            messenger.sendMessage("%prefix% §7File Size§8: §6" + ((recording.getFile().length() / 1024d) / 1024d) + "MB");
+                            messenger.sendMessage("%prefix% §7File Size§8: §6" + StringUtil.format("#,##0.0kb", recording.getFile().length() / 1024d));
                         } else messenger.sendMessage("%prefix% §cA record with this name does not exist");
                     } else messenger.sendMessage("%prefix% §c/cinematic info §8[§6Record§8]");
                 } else if (args[0].equalsIgnoreCase("list")) {
