@@ -48,10 +48,22 @@ public class CinematicCommand extends TNLCommand {
                         String name = args[1];
                         if (!Recording.exists(name)) {
                             messenger.sendMessage("%prefix% §aRecording §6" + name);
-                            cinematicManger.record(new Recording(name), (player1, cinematic) -> {
-                                player1.messenger().sendMessage("%prefix% §aSaving recording §6" + name);
-                                cinematic.export();
-                                player1.cinematicManger().play(cinematic);
+                            cinematicManger.record(new Recording(name), new CinematicManger.Finished() {
+                                @Override
+                                public void success(@Nonnull TNLPlayer player, @Nonnull Recording recording) {
+                                    player.messenger().sendMessage("%prefix% §aSaving recording §6" + name);
+                                }
+
+                                @Override
+                                public void general(@Nonnull TNLPlayer player, @Nonnull Recording recording) {
+                                    recording.export();
+                                    player.cinematicManger().play(recording);
+                                }
+
+                                @Override
+                                public void failure(@Nonnull TNLPlayer player, @Nonnull Recording recording) {
+                                    player.messenger().sendMessage("%prefix% §cAn error has occurred while recording");
+                                }
                             });
                         } else messenger.sendMessage("%prefix% §cA record with this name already exists");
                     } else messenger.sendMessage("%prefix% §c/cinematic record §8[§6Record§8]");
