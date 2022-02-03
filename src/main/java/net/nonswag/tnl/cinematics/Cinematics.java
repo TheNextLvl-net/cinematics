@@ -17,7 +17,9 @@ public class Cinematics extends TNLPlugin {
     public void enable() {
         setInstance(this);
         getCommandManager().registerCommand(new CinematicCommand());
-        if (Settings.AUTO_UPDATER.getValue()) new PluginUpdate(this).downloadUpdate();
+        async(() -> {
+            if (Settings.AUTO_UPDATER.getValue()) new PluginUpdate(this).downloadUpdate();
+        });
     }
 
     private static void setInstance(@Nonnull Cinematics instance) {
