@@ -5,5 +5,3 @@ api-version: "1.13"
 website: "https://www.thenextlvl.net"
 author: "NonSwag"
 depend: ["TNLListener"]
-commands:
-  cinematic:
