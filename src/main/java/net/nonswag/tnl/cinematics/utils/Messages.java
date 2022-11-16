@@ -1,19 +1,14 @@
 package net.nonswag.tnl.cinematics.utils;
 
+import net.nonswag.core.api.annotation.FieldsAreNonnullByDefault;
 import net.nonswag.core.api.message.Message;
 import net.nonswag.core.api.message.key.MessageKey;
 
-import javax.annotation.Nonnull;
-
+@FieldsAreNonnullByDefault
 public final class Messages {
-
-    @Nonnull
     public static final MessageKey RECORD_NOT_FOUND = new MessageKey("record-not-found");
-    @Nonnull
     public static final MessageKey RECORDING_ERROR = new MessageKey("recording-error");
-    @Nonnull
     public static final MessageKey RECORDING_SAVED = new MessageKey("recording-saved");
-    @Nonnull
     public static final MessageKey RECORDING_STOPPED = new MessageKey("recording-stopped");
 
     public static void init() {

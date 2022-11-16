@@ -8,7 +8,6 @@ import net.nonswag.tnl.listener.api.cinematic.Recording;
 import net.nonswag.tnl.listener.api.command.exceptions.InvalidUseException;
 import net.nonswag.tnl.listener.api.command.simple.SubCommand;
 
-import javax.annotation.Nonnull;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +19,7 @@ class Info extends SubCommand {
     }
 
     @Override
-    protected void execute(@Nonnull Invocation invocation) {
+    protected void execute(Invocation invocation) {
         CommandSource source = invocation.source();
         String[] args = invocation.arguments();
         if (args.length < 2) throw new InvalidUseException(this);
@@ -32,9 +31,8 @@ class Info extends SubCommand {
         source.sendMessage("%prefix% §7File Size§8: §6" + size);
     }
 
-    @Nonnull
     @Override
-    protected List<String> suggest(@Nonnull Invocation invocation) {
+    protected List<String> suggest(Invocation invocation) {
         List<String> suggestions = new ArrayList<>();
         File[] files = Recording.getRecordings();
         for (File file : files) suggestions.add(file.getName().substring(0, file.getName().length() - 5));
@@ -42,7 +40,7 @@ class Info extends SubCommand {
     }
 
     @Override
-    public void usage(@Nonnull Invocation invocation) {
+    public void usage(Invocation invocation) {
         invocation.source().sendMessage("%prefix% §c/cinematic info §8[§6Record§8]");
     }
 }

@@ -11,8 +11,6 @@ import net.nonswag.tnl.listener.api.player.TNLPlayer;
 import net.nonswag.tnl.listener.api.player.manager.CinematicManger;
 import net.nonswag.tnl.listener.api.player.manager.Messenger;
 
-import javax.annotation.Nonnull;
-
 class Record extends PlayerSubCommand {
 
     Record() {
@@ -20,7 +18,7 @@ class Record extends PlayerSubCommand {
     }
 
     @Override
-    protected void execute(@Nonnull Invocation invocation) {
+    protected void execute(Invocation invocation) {
         TNLPlayer player = (TNLPlayer) invocation.source();
         String[] args = invocation.arguments();
         CinematicManger cinematicManger = player.cinematicManger();
@@ -33,25 +31,25 @@ class Record extends PlayerSubCommand {
         messenger.sendMessage("%prefix% §aRecording §6" + args[1]);
         cinematicManger.record(new Recording(args[1]), new CinematicManger.Finished() {
             @Override
-            public void success(@Nonnull TNLPlayer player, @Nonnull Recording recording) {
+            public void success(TNLPlayer player, Recording recording) {
                 player.messenger().sendMessage(Messages.RECORDING_SAVED, new Placeholder("recording", args[1]));
             }
 
             @Override
-            public void general(@Nonnull TNLPlayer player, @Nonnull Recording recording) {
+            public void general(TNLPlayer player, Recording recording) {
                 recording.export();
                 player.cinematicManger().play(recording);
             }
 
             @Override
-            public void failure(@Nonnull TNLPlayer player, @Nonnull Recording recording) {
+            public void failure(TNLPlayer player, Recording recording) {
                 player.messenger().sendMessage(Messages.RECORDING_ERROR);
             }
         });
     }
 
     @Override
-    public void usage(@Nonnull Invocation invocation) {
+    public void usage(Invocation invocation) {
         invocation.source().sendMessage("%prefix% §c/cinematic record §8[§6Name§8]");
     }
 }

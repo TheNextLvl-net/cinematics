@@ -6,7 +6,6 @@ import net.nonswag.tnl.listener.api.cinematic.Recording;
 import net.nonswag.tnl.listener.api.command.exceptions.InvalidUseException;
 import net.nonswag.tnl.listener.api.command.simple.SubCommand;
 
-import javax.annotation.Nonnull;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +17,7 @@ class Delete extends SubCommand {
     }
 
     @Override
-    protected void execute(@Nonnull Invocation invocation) {
+    protected void execute(Invocation invocation) {
         String[] args = invocation.arguments();
         if (args.length < 2) throw new InvalidUseException(this);
         Recording recording = Recording.load(args[1]);
@@ -27,9 +26,8 @@ class Delete extends SubCommand {
         else invocation.source().sendMessage("%prefix% §cFailed to delete recording");
     }
 
-    @Nonnull
     @Override
-    protected List<String> suggest(@Nonnull Invocation invocation) {
+    protected List<String> suggest(Invocation invocation) {
         List<String> suggestions = new ArrayList<>();
         File[] files = Recording.getRecordings();
         for (File file : files) suggestions.add(file.getName().substring(0, file.getName().length() - 5));
@@ -37,7 +35,7 @@ class Delete extends SubCommand {
     }
 
     @Override
-    public void usage(@Nonnull Invocation invocation) {
+    public void usage(Invocation invocation) {
         invocation.source().sendMessage("%prefix% §c/cinematic delete §8[§6Record§8]");
     }
 }
