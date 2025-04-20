@@ -1,4 +1,4 @@
-package net.nonswag.tnl.cinematics.commands;
+package net.thenextlvl.cinematics.commands;
 
 import net.nonswag.core.api.command.Invocation;
 import net.nonswag.tnl.listener.api.cinematic.Recording;

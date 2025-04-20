@@ -1,4 +1,4 @@
-package net.nonswag.tnl.cinematics.utils;
+package net.thenextlvl.cinematics.utils;
 
 import net.nonswag.core.api.annotation.FieldsAreNonnullByDefault;
 import net.nonswag.core.api.file.formats.MessageFile;
