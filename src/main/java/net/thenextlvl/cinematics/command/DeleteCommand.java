@@ -1,4 +1,4 @@
-package net.thenextlvl.cinematics.commands;
+package net.thenextlvl.cinematics.command;
 
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
