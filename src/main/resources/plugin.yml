@@ -1,7 +1,0 @@
-name: "TNLCinematics"
-version: "2.0.0"
-main: "net.nonswag.tnl.cinematics.Cinematics"
-api-version: "1.19"
-website: "https://www.thenextlvl.net"
-author: "NonSwag"
-depend: ["TNLListener"]
