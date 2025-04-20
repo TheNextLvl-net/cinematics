@@ -1,15 +1,19 @@
 package net.thenextlvl.cinematics.commands;
 
+import com.mojang.brigadier.tree.LiteralCommandNode;
+import io.papermc.paper.command.brigadier.CommandSourceStack;
+import io.papermc.paper.command.brigadier.Commands;
 import net.thenextlvl.cinematics.CinematicsPlugin;
 
 public class CinematicCommand {
-
-    public CinematicCommand() {
-        super("cinematic", "tnl.cinematic");
-        addSubCommand(new RecordCommand());
-        addSubCommand(new DeleteCommand());
-        addSubCommand(new PlayCommand());
-        addSubCommand(new InfoCommand());
-        addSubCommand(new ListCommand());
+    public static LiteralCommandNode<CommandSourceStack> create(CinematicsPlugin plugin) {
+        return Commands.literal("cinematic")
+                .requires(source -> source.getSender().hasPermission("cinematics.command.cinematic"))
+                .then(RecordCommand.create(plugin))
+                .then(DeleteCommand.create(plugin))
+                .then(PlayCommand.create(plugin))
+                .then(InfoCommand.create(plugin))
+                .then(ListCommand.create(plugin))
+                .build();
     }
 }
