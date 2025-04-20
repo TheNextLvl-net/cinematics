@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="TNLCinematics">
-    <output-path>$USER_HOME$/Desktop/Coding/PluginProjects/Plugins</output-path>
-    <root id="archive" name="TNLCinematics.jar">
-      <element id="module-output" name="TNLCinematics" />
-    </root>
-  </artifact>
-</component>
