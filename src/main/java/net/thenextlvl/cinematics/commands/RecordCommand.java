@@ -11,9 +11,9 @@ import net.nonswag.tnl.listener.api.player.TNLPlayer;
 import net.nonswag.tnl.listener.api.player.manager.CinematicManger;
 import net.nonswag.tnl.listener.api.player.manager.Messenger;
 
-class Record extends PlayerSubCommand {
+class RecordCommand extends PlayerSubCommand {
 
-    Record() {
+    RecordCommand() {
         super("record");
     }
 

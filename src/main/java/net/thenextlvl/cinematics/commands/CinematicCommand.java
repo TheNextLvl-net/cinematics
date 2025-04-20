@@ -1,15 +1,15 @@
 package net.thenextlvl.cinematics.commands;
 
-import net.nonswag.tnl.listener.api.command.simple.SimpleCommand;
+import net.thenextlvl.cinematics.CinematicsPlugin;
 
-public class CinematicCommand extends SimpleCommand {
+public class CinematicCommand {
 
     public CinematicCommand() {
         super("cinematic", "tnl.cinematic");
-        addSubCommand(new Record());
-        addSubCommand(new Delete());
-        addSubCommand(new Play());
-        addSubCommand(new Info());
-        addSubCommand(new List());
+        addSubCommand(new RecordCommand());
+        addSubCommand(new DeleteCommand());
+        addSubCommand(new PlayCommand());
+        addSubCommand(new InfoCommand());
+        addSubCommand(new ListCommand());
     }
 }

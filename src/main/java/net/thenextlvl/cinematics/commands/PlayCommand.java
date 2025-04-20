@@ -4,26 +4,27 @@ import net.nonswag.core.api.command.Invocation;
 import net.thenextlvl.cinematics.errors.RecordNotFoundException;
 import net.nonswag.tnl.listener.api.cinematic.Recording;
 import net.nonswag.tnl.listener.api.command.exceptions.InvalidUseException;
-import net.nonswag.tnl.listener.api.command.simple.SubCommand;
+import net.nonswag.tnl.listener.api.command.simple.PlayerSubCommand;
+import net.nonswag.tnl.listener.api.player.TNLPlayer;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-class Delete extends SubCommand {
+class PlayCommand extends PlayerSubCommand {
 
-    Delete() {
-        super("delete");
+    PlayCommand() {
+        super("play");
     }
 
     @Override
     protected void execute(Invocation invocation) {
+        TNLPlayer player = (TNLPlayer) invocation.source();
         String[] args = invocation.arguments();
         if (args.length < 2) throw new InvalidUseException(this);
         Recording recording = Recording.load(args[1]);
         if (recording == null) throw new RecordNotFoundException();
-        if (recording.delete()) invocation.source().sendMessage("%prefix% §aDeleted the recording §6" + args[1]);
-        else invocation.source().sendMessage("%prefix% §cFailed to delete recording");
+        player.cinematicManger().play(recording);
     }
 
     @Override
@@ -36,6 +37,6 @@ class Delete extends SubCommand {
 
     @Override
     public void usage(Invocation invocation) {
-        invocation.source().sendMessage("%prefix% §c/cinematic delete §8[§6Record§8]");
+        invocation.source().sendMessage("%prefix% §c/cinematic play §8[§6Record§8]");
     }
 }

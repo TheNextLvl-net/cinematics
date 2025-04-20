@@ -7,9 +7,9 @@ import net.nonswag.tnl.listener.api.command.simple.SubCommand;
 import java.io.File;
 import java.util.ArrayList;
 
-class List extends SubCommand {
+class ListCommand extends SubCommand {
 
-    List() {
+    ListCommand() {
         super("list");
     }
 

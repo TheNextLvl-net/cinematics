@@ -12,9 +12,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-class Info extends SubCommand {
+class InfoCommand extends SubCommand {
 
-    Info() {
+    InfoCommand() {
         super("info");
     }
 
