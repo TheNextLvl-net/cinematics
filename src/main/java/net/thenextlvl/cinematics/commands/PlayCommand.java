@@ -1,6 +1,10 @@
 package net.thenextlvl.cinematics.commands;
 
+import com.mojang.brigadier.builder.LiteralArgumentBuilder;
+import io.papermc.paper.command.brigadier.CommandSourceStack;
+import io.papermc.paper.command.brigadier.Commands;
 import net.nonswag.core.api.command.Invocation;
+import net.thenextlvl.cinematics.CinematicsPlugin;
 import net.thenextlvl.cinematics.errors.RecordNotFoundException;
 import net.nonswag.tnl.listener.api.cinematic.Recording;
 import net.nonswag.tnl.listener.api.command.exceptions.InvalidUseException;
@@ -11,10 +15,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-class PlayCommand extends PlayerSubCommand {
-
-    PlayCommand() {
-        super("play");
+class PlayCommand {
+    public static LiteralArgumentBuilder<CommandSourceStack> create(CinematicsPlugin plugin) {
+        return Commands.literal("play");
     }
 
     @Override
@@ -33,10 +36,5 @@ class PlayCommand extends PlayerSubCommand {
         File[] files = Recording.getRecordings();
         for (File file : files) suggestions.add(file.getName().substring(0, file.getName().length() - 5));
         return suggestions;
-    }
-
-    @Override
-    public void usage(Invocation invocation) {
-        invocation.source().sendMessage("%prefix% §c/cinematic play §8[§6Record§8]");
     }
 }

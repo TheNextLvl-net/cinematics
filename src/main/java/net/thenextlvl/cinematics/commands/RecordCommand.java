@@ -1,7 +1,11 @@
 package net.thenextlvl.cinematics.commands;
 
+import com.mojang.brigadier.builder.LiteralArgumentBuilder;
+import io.papermc.paper.command.brigadier.CommandSourceStack;
+import io.papermc.paper.command.brigadier.Commands;
 import net.nonswag.core.api.command.Invocation;
 import net.nonswag.core.api.message.Placeholder;
+import net.thenextlvl.cinematics.CinematicsPlugin;
 import net.thenextlvl.cinematics.errors.RecordNotFoundException;
 import net.thenextlvl.cinematics.utils.Messages;
 import net.nonswag.tnl.listener.api.cinematic.Recording;
@@ -11,10 +15,9 @@ import net.nonswag.tnl.listener.api.player.TNLPlayer;
 import net.nonswag.tnl.listener.api.player.manager.CinematicManger;
 import net.nonswag.tnl.listener.api.player.manager.Messenger;
 
-class RecordCommand extends PlayerSubCommand {
-
-    RecordCommand() {
-        super("record");
+class RecordCommand {
+    public static LiteralArgumentBuilder<CommandSourceStack> create(CinematicsPlugin plugin) {
+        return Commands.literal("record");
     }
 
     @Override
@@ -46,10 +49,5 @@ class RecordCommand extends PlayerSubCommand {
                 player.messenger().sendMessage(Messages.RECORDING_ERROR);
             }
         });
-    }
-
-    @Override
-    public void usage(Invocation invocation) {
-        invocation.source().sendMessage("%prefix% §c/cinematic record §8[§6Name§8]");
     }
 }
